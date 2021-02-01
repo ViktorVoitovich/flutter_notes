@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "963968563922",
+    "project_id": "block-notes-41762",
+    "storage_bucket": "block-notes-41762.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963968563922:android:a06224fe8ec2acc0d4cb0b",
+        "android_client_info": {
+          "package_name": "com.voitovich.notes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963968563922-m1i7aq8pmtlg58stkmqncah8dqblu71r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOlB2YTJ6kpghJ7WmMyUHTy-P_lB6QhJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963968563922-m1i7aq8pmtlg58stkmqncah8dqblu71r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "963968563922-3a5ufl3t82rcm0lsr8ts479ku0s4nrr7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.voitovich.notesApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
