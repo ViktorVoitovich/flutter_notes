@@ -17,20 +17,8 @@ class AuthRepository extends BaseAuthRepository {
   })  : _firestore = firestore ?? FirebaseFirestore.instance,
         _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
 
-  Future<User> _firebaseUserToUser(firebase_auth.User user) async {
-    DocumentSnapshot userDoc =
-        await _firestore.collection(Paths.users).doc(user.uid).get();
-
-    if (userDoc.exists) {
-      User user = User.fromEntity(UserEntity.fromSnapshot(userDoc));
-      return user;
-    }
-
-    return User(
-      id: user.uid,
-      email: '',
-    );
-  }
+  @override
+  void dispose() {}
 
   @override
   Future<User> loginAnonymously() async {
@@ -79,9 +67,6 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  void dispose() {}
-
-  @override
   Future<User> getCurrentUser() async {
     final currentUser = _firebaseAuth.currentUser;
 
@@ -96,5 +81,20 @@ class AuthRepository extends BaseAuthRepository {
   Future<bool> isAnonymous() async {
     final currentUser = _firebaseAuth.currentUser;
     return currentUser.isAnonymous;
+  }
+
+  Future<User> _firebaseUserToUser(firebase_auth.User user) async {
+    DocumentSnapshot userDoc =
+        await _firestore.collection(Paths.users).doc(user.uid).get();
+
+    if (userDoc.exists) {
+      User user = User.fromEntity(UserEntity.fromSnapshot(userDoc));
+      return user;
+    }
+
+    return User(
+      id: user.uid,
+      email: '',
+    );
   }
 }

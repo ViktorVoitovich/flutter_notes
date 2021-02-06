@@ -17,7 +17,7 @@ class NoteEntity extends Equatable {
     @required this.timestamp,
   });
 
-  factory NoteEntity.fromSnapshor(DocumentSnapshot doc) {
+  factory NoteEntity.fromSnapshot(DocumentSnapshot doc) {
     return NoteEntity(
       id: doc.id,
       userId: doc.data()['userId'] ?? '',
