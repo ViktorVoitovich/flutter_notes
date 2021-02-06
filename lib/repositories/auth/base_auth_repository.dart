@@ -7,5 +7,5 @@ abstract class BaseAuthRepository extends BaseRepository {
   Future<User> loginWithEmailAndPassword({String email, String password});
   Future<User> logout();
   Future<User> getCurrentUser();
-  Future<bool> isAnonymous();
+  bool isAnonymous();
 }

@@ -78,7 +78,7 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<bool> isAnonymous() async {
+  bool isAnonymous() {
     final currentUser = _firebaseAuth.currentUser;
     return currentUser.isAnonymous;
   }
