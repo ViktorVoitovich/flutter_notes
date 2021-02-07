@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:meta/meta.dart';
 
 import '../../config/paths.dart';
-import '../../entitie/user_entity.dart';
+import '../../entities/user_entity.dart';
 import '../../models/models.dart';
 import '../repositories.dart';
 

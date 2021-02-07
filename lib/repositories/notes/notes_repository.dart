@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
 import '../../config/paths.dart';
-import '../../entitie/entities.dart';
+import '../../entities/entities.dart';
 import '../../models/note_model.dart';
 import '../repositories.dart';
 
