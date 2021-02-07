@@ -6,11 +6,11 @@ import '../../entities/entities.dart';
 import '../../models/note_model.dart';
 import '../repositories.dart';
 
-class NoteRepository extends BaseNotesRepository {
+class NotesRepository extends BaseNotesRepository {
   final FirebaseFirestore _firestore;
   final Duration _timeoutDuration = Duration(seconds: 10);
 
-  NoteRepository({FirebaseFirestore firestore})
+  NotesRepository({FirebaseFirestore firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override

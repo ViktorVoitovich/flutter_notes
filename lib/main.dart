@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/blocs.dart';
-import 'blocs/simple_bloc_delegate.dart';
+import 'blocs/simple_bloc_observer.dart';
 import 'repositories/repositories.dart';
 import 'screens/screens.dart';
 
@@ -26,6 +26,12 @@ class App extends StatelessWidget {
           create: (_) => AuthBloc(
             authRepository: AuthRepository(),
           )..add(AppStarted()),
+        ),
+        BlocProvider<NotesBloc>(
+          create: (_) => NotesBloc(
+            authRepository: AuthRepository(),
+            notesRepository: NotesRepository(),
+          ),
         ),
       ],
       child: MaterialApp(

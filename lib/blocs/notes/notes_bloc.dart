@@ -12,15 +12,15 @@ part 'notes_state.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
   final AuthRepository _authRepository;
-  final NoteRepository _noteRepository;
+  final NotesRepository _notesRepository;
 
   StreamSubscription _notesSubscription;
 
   NotesBloc({
     @required AuthRepository authRepository,
-    @required NoteRepository noteRepository,
+    @required NotesRepository notesRepository,
   })  : _authRepository = authRepository,
-        _noteRepository = noteRepository,
+        _notesRepository = notesRepository,
         super(NotesInitial());
 
   @override
@@ -41,7 +41,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
 
       _notesSubscription?.cancel();
 
-      _notesSubscription = _noteRepository
+      _notesSubscription = _notesRepository
           .streamNotes(userId: currentUser.id)
           .listen((notes) => add(UpdateNotes(notes: notes)));
     } catch (err) {
