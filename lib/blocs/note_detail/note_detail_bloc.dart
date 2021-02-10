@@ -17,8 +17,8 @@ class NoteDetailBloc extends Bloc<NoteDetailEvent, NoteDetailState> {
   final NotesRepository _notesRepository;
 
   NoteDetailBloc({
-    AuthBloc authBloc,
-    NotesRepository notesRepository,
+    @required AuthBloc authBloc,
+    @required NotesRepository notesRepository,
   })  : _authBloc = authBloc,
         _notesRepository = notesRepository,
         super(NoteDetailState.empty());

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
+import '../repositories/notes/notes_repository.dart';
 import '../widgets/widgets.dart';
+import 'screens.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -17,6 +19,22 @@ class HomeScreen extends StatelessWidget {
             builder: (context, notesState) {
               return _buildBody(context, authState, notesState);
             },
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black,
+            foregroundColor: Colors.white,
+            child: Icon(Icons.add),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BlocProvider<NoteDetailBloc>(
+                  create: (_) => NoteDetailBloc(
+                    authBloc: context.read<AuthBloc>(),
+                    notesRepository: NotesRepository(),
+                  ),
+                  child: NoteDetailScreen(),
+                ),
+              ),
+            ),
           ),
         );
       },
@@ -56,7 +74,17 @@ class HomeScreen extends StatelessWidget {
             notesState is NotesLoaded
                 ? NotesGrid(
                     notes: notesState.notes,
-                    onTap: (note) => print(note),
+                    onTap: (note) => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider<NoteDetailBloc>(
+                          create: (_) => NoteDetailBloc(
+                            authBloc: context.read<AuthBloc>(),
+                            notesRepository: NotesRepository(),
+                          )..add(NoteLoaded(note: note)),
+                          child: NoteDetailScreen(note: note),
+                        ),
+                      ),
+                    ),
                   )
                 : const SliverPadding(padding: EdgeInsets.zero),
           ],
