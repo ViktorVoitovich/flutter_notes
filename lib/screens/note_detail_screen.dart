@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/note_detail/note_detail_bloc.dart';
 import '../models/models.dart';
+import '../widgets/widgets.dart';
 
 class NoteDetailScreen extends StatefulWidget {
   final Note note;
@@ -17,6 +18,13 @@ class NoteDetailScreen extends StatefulWidget {
 class _NoteDetailScreenState extends State<NoteDetailScreen> {
   final FocusNode _contentFocusNode = FocusNode();
   final TextEditingController _contentController = TextEditingController();
+  final List<HexColor> _colors = [
+    HexColor('#E74C3C'),
+    HexColor('#3498DB'),
+    HexColor('#27AE60'),
+    HexColor('#F6C924'),
+    HexColor('#8E44AD'),
+  ];
 
   bool get _isEditing => widget.note != null;
 
@@ -102,6 +110,10 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
                     .read<NoteDetailBloc>()
                     .add(NoteContentUpdated(content: value)),
               ),
+            ),
+            bottomSheet: ColorPicker(
+              state: state,
+              colors: _colors,
             ),
           );
         },

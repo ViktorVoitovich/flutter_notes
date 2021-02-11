@@ -38,7 +38,8 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Firebase Notes',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.white,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: HomeScreen(),
       ),
