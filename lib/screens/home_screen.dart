@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
+import '../config/themes.dart';
 import '../repositories/notes/notes_repository.dart';
 import '../widgets/widgets.dart';
 import 'screens.dart';
@@ -65,10 +66,7 @@ class HomeScreen extends StatelessWidget {
                     : print('go to login'),
               ),
               actions: [
-                IconButton(
-                  icon: Icon(Icons.brightness_4),
-                  onPressed: () => print('change theme'),
-                ),
+                _buildThemeIconButton(context),
               ],
             ),
             notesState is NotesLoaded
@@ -103,6 +101,16 @@ class HomeScreen extends StatelessWidget {
               )
             : const SizedBox.shrink(),
       ],
+    );
+  }
+
+  IconButton _buildThemeIconButton(BuildContext context) {
+    final bool isLightTheme = context.read<ThemeBloc>().state.themeData ==
+        Themes.themeData[AppTheme.LightTheme];
+    return IconButton(
+      icon: isLightTheme ? Icon(Icons.brightness_4) : Icon(Icons.brightness_5),
+      iconSize: 28.0,
+      onPressed: () => context.read<ThemeBloc>().add(UpdateTheme()),
     );
   }
 }

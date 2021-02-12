@@ -33,15 +33,19 @@ class App extends StatelessWidget {
             notesRepository: NotesRepository(),
           ),
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Firebase Notes',
-        theme: ThemeData(
-          primaryColor: Colors.white,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+        BlocProvider<ThemeBloc>(
+          create: (_) => ThemeBloc()..add(LoadTheme()),
         ),
-        home: HomeScreen(),
+      ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Firebase Notes',
+            theme: state.themeData,
+            home: HomeScreen(),
+          );
+        },
       ),
     );
   }
