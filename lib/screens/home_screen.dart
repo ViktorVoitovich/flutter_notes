@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/auth/auth_bloc.dart';
 import '../blocs/blocs.dart';
+import '../blocs/login/login_bloc.dart';
 import '../config/themes.dart';
 import '../repositories/notes/notes_repository.dart';
+import '../repositories/repositories.dart';
 import '../widgets/widgets.dart';
+import 'login_screen.dart';
 import 'screens.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -63,7 +67,17 @@ class HomeScreen extends StatelessWidget {
                 iconSize: 28.0,
                 onPressed: () => authState is Authenticated
                     ? context.read<AuthBloc>().add(Logout())
-                    : print('go to login'),
+                    : Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider<LoginBloc>(
+                            create: (_) => LoginBloc(
+                              authBloc: context.read<AuthBloc>(),
+                              authRepository: AuthRepository(),
+                            ),
+                            child: LoginScreen(),
+                          ),
+                        ),
+                      ),
               ),
               actions: [
                 _buildThemeIconButton(context),

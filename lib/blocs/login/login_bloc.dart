@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../helpers/validators.dart';
 import '../../repositories/repositories.dart';
@@ -34,7 +33,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else if (event is LoginPressed) {
       yield* _mapLoginPressedToState(event);
     } else if (event is SignupPressed) {
-      yield* _mapSingupPressedToState(event);
+      yield* _mapSignupPressedToState(event);
     }
   }
 
@@ -60,12 +59,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       _authBloc.add(Login());
       yield LoginState.success();
-    } on PlatformException catch (err) {
+    } catch (err) {
       yield LoginState.failure(err.message);
     }
   }
 
-  Stream<LoginState> _mapSingupPressedToState(SignupPressed event) async* {
+  Stream<LoginState> _mapSignupPressedToState(SignupPressed event) async* {
     yield LoginState.loading();
 
     try {
@@ -75,7 +74,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       _authBloc.add(Login());
       yield LoginState.success();
-    } on PlatformException catch (err) {
+    } catch (err) {
       yield LoginState.failure(err.message);
     }
   }
